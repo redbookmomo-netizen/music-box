@@ -10,6 +10,17 @@
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="theme-color" content="#12070b" />
   <link id="appleTouchIcon" rel="apple-touch-icon" href="" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://redbookmomo-netizen.github.io/music-box/" />
+  <meta property="og:title" content="圣咏玫瑰 · 皇家巴洛克机械八音盒" />
+  <meta property="og:description" content="轻触上弦奏响 · 指尖拨动皇冠与双色玫瑰立体旋转，彩绘花窗丁达尔圣光与金粉微尘浮动，内置巴赫哥特复调、萨蒂秘境与古典八音盒名曲。" />
+  <meta property="og:image" content="https://redbookmomo-netizen.github.io/music-box/og-cover.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="圣咏玫瑰 · 皇家巴洛克机械八音盒" />
+  <meta name="twitter:description" content="轻触上弦奏响 · 指尖拨动皇冠与玫瑰亲手转音，内置巴赫哥特复调、萨蒂与十二首八音盒名曲。" />
+  <meta name="twitter:image" content="https://redbookmomo-netizen.github.io/music-box/og-cover.jpg" />
   <title>圣咏玫瑰 · 皇家巴洛克八音盒</title>
   <style>
     *, *::before, *::after {
@@ -1359,6 +1370,26 @@
       lastSchedAudioTime = AC.currentTime;
     }
   });
+
+  // 兼容 X (Twitter)、微信、Telegram、Discord 等 App 内置 WebView 的首次触屏静音帧音频解锁
+  function unlockInAppWebViewAudio() {
+    ensureAudio();
+    if (!AC) return;
+    if (AC.state === 'suspended') AC.resume().catch(() => {});
+    try {
+      const sil = AC.createBuffer(1, 1, 22050);
+      const src = AC.createBufferSource();
+      src.buffer = sil;
+      src.connect(AC.destination);
+      src.start(0);
+    } catch (_) {}
+  }
+  ['touchend', 'click'].forEach(evt => {
+    window.addEventListener(evt, unlockInAppWebViewAudio, { once: true, passive: true });
+  });
+  document.addEventListener('WeixinJSBridgeReady', () => {
+    if (AC && AC.state === 'suspended') AC.resume().catch(() => {});
+  }, false);
 
   /* =========================================================================
    * 5. 图像资源加载与前景遮罩层预烘焙
