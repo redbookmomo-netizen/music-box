@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#12070b" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://redbookmomo-netizen.github.io/music-box/demo/" />
+  <meta property="og:title" content="圣咏玫瑰八音盒 · 1080P 60FPS 原画实机 Demo 提取处" />
+  <meta property="og:description" content="专为 iPhone 相册直存、X 高清上传与微信秒发定制的 1080P 60帧无损级八音盒实机演示视频与离线礼盒。" />
+  <meta property="og:image" content="https://redbookmomo-netizen.github.io/music-box/og-cover.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="圣咏玫瑰八音盒 · 1080P 60FPS 原画实机 Demo 提取处" />
+  <meta name="twitter:image" content="https://redbookmomo-netizen.github.io/music-box/og-cover.jpg" />
+  <title>圣咏玫瑰八音盒 · 超清 Demo 与礼盒提取处</title>
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+    html, body {
+      margin: 0;
+      padding: 0;
+      min-height: 100%;
+      background:
+        radial-gradient(ellipse at 50% 0%, rgba(118, 24, 52, 0.36) 0%, rgba(18, 7, 11, 0) 62%),
+        linear-gradient(180deg, #16070d 0%, #0e0408 100%);
+      color: #faecd2;
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Noto Sans SC", sans-serif;
+    }
+    .wrap {
+      max-width: 500px;
+      margin: 0 auto;
+      padding:
+        max(18px, calc(env(safe-area-inset-top, 14px) + 10px))
+        16px
+        max(34px, calc(env(safe-area-inset-bottom, 16px) + 22px));
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .back-pill {
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 500;
+      color: #ffe9b8;
+      background: rgba(46, 12, 24, 0.72);
+      border: 1px solid rgba(244, 208, 138, 0.38);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+    }
+    .badge-top {
+      font-size: 11.5px;
+      color: rgba(248, 226, 184, 0.76);
+      letter-spacing: 0.04em;
+    }
+    .hero-header {
+      text-align: center;
+      padding: 2px 4px;
+    }
+    .hero-header h1 {
+      margin: 0;
+      font-family: "Songti SC", "STSong", "Noto Serif SC", Georgia, serif;
+      font-size: 21px;
+      font-weight: 600;
+      color: #fff2d2;
+      letter-spacing: 0.06em;
+      text-shadow: 0 2px 12px rgba(255, 202, 112, 0.32);
+    }
+    .hero-header p {
+      margin: 6px 0 0;
+      font-size: 12.5px;
+      line-height: 1.55;
+      color: rgba(250, 232, 198, 0.75);
+    }
+
+    .video-stage {
+      position: relative;
+      width: 100%;
+      max-width: 270px;
+      margin: 0 auto;
+      border-radius: 22px;
+      overflow: hidden;
+      border: 1.5px solid rgba(244, 208, 138, 0.48);
+      box-shadow:
+        0 18px 44px rgba(0, 0, 0, 0.65),
+        0 0 28px rgba(214, 146, 56, 0.16);
+      background: #0b0306;
+      aspect-ratio: 9 / 16;
+    }
+    .video-stage video {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    .card {
+      border-radius: 20px;
+      padding: 16px;
+      background: linear-gradient(155deg, rgba(44, 11, 22, 0.82), rgba(21, 6, 12, 0.90));
+      border: 1px solid rgba(244, 208, 138, 0.34);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.46);
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+    }
+    .card-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 8px;
+    }
+    .card-title {
+      font-size: 15.5px;
+      font-weight: 600;
+      color: #fff3d6;
+      line-height: 1.35;
+    }
+    .card-pill {
+      flex-shrink: 0;
+      padding: 2px 9px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 600;
+      color: #ffe9b6;
+      background: rgba(172, 40, 74, 0.56);
+      border: 1px solid rgba(246, 208, 140, 0.38);
+    }
+    .card-desc {
+      margin: 0;
+      font-size: 12.5px;
+      line-height: 1.55;
+      color: rgba(248, 228, 192, 0.78);
+    }
+
+    .btn-primary {
+      appearance: none;
+      width: 100%;
+      border: 0;
+      border-radius: 14px;
+      padding: 13px 16px;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      color: #2f0912;
+      background: linear-gradient(135deg, #fff5cd 0%, #f3cb72 48%, #c98c2b 100%);
+      box-shadow:
+        0 6px 20px rgba(243, 195, 98, 0.32),
+        0 1px 1px rgba(255, 255, 255, 0.7) inset;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      transition: transform 0.14s ease, filter 0.2s ease;
+    }
+    .btn-primary:active {
+      transform: scale(0.97);
+    }
+    .btn-primary.ready-pulse {
+      background: linear-gradient(135deg, #ffffff 0%, #ffe699 45%, #e6a83a 100%);
+      box-shadow:
+        0 0 24px rgba(255, 220, 128, 0.68),
+        0 1px 2px rgba(255, 255, 255, 0.9) inset;
+    }
+
+    .sub-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      font-size: 12px;
+    }
+    .sub-hint {
+      color: rgba(246, 224, 184, 0.66);
+      line-height: 1.4;
+    }
+    .direct-link {
+      flex-shrink: 0;
+      color: #f7d78c;
+      text-decoration: none;
+      padding: 5px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(244, 208, 138, 0.32);
+      background: rgba(255, 236, 195, 0.07);
+      font-weight: 500;
+    }
+
+    .btn-secondary {
+      appearance: none;
+      width: 100%;
+      border-radius: 13px;
+      padding: 11px 14px;
+      font-size: 13.5px;
+      font-weight: 600;
+      color: #fff0cb;
+      background: rgba(132, 28, 56, 0.48);
+      border: 1px solid rgba(244, 208, 138, 0.42);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: transform 0.14s ease, background 0.2s ease;
+    }
+    .btn-secondary:active {
+      transform: scale(0.97);
+      background: rgba(162, 38, 72, 0.65);
+    }
+
+    .copy-box {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      background: rgba(12, 3, 7, 0.58);
+      border: 1px solid rgba(244, 208, 138, 0.24);
+      border-radius: 12px;
+      padding: 8px 10px;
+    }
+    .copy-url {
+      flex: 1;
+      font-size: 12px;
+      color: #f8e2b2;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      user-select: all;
+      -webkit-user-select: all;
+    }
+    .copy-btn {
+      appearance: none;
+      border: 1px solid rgba(244, 208, 138, 0.42);
+      background: rgba(244, 208, 138, 0.16);
+      color: #fff3d1;
+      border-radius: 9px;
+      padding: 6px 11px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: max(24px, calc(env(safe-area-inset-bottom, 12px) + 16px));
+      transform: translateX(-50%) translateY(16px);
+      background: rgba(32, 9, 17, 0.94);
+      border: 1px solid rgba(250, 216, 146, 0.6);
+      color: #fff4d8;
+      padding: 9px 18px;
+      border-radius: 999px;
+      font-size: 13px;
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.6);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+      z-index: 50;
+      white-space: nowrap;
+    }
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <div class="top-bar">
+      <a class="back-pill" href="../">🌹 返回八音盒玩具</a>
+      <span class="badge-top">1080P · 60FPS · 48kHz</span>
+    </div>
+
+    <header class="hero-header">
+      <h1>圣咏玫瑰 · 超清实机 Demo 提取处</h1>
+      <p>专为 iPhone 18 Pro Max 调校：支持一键弹出系统菜单<br/>点<strong>「存储视频」</strong>直接无损存入手机相册</p>
+    </header>
+
+    <div class="video-stage">
+      <video
+        id="previewVideo"
+        src="./royal-music-box-wechat-hd.mp4"
+        poster="./poster-9x16.jpg"
+        playsinline
+        webkit-playsinline
+        controls
+        preload="metadata"
+      ></video>
+    </div>
+
+    <!-- 版本 1：X 平台与手机相册珍藏母带版 -->
+    <section class="card">
+      <div class="card-head">
+        <div class="card-title">🎬 X（Twitter）与相册珍藏 · 原画母带版</div>
+        <span class="card-pill">29.6 MB · 10.5 Mbps</span>
+      </div>
+      <p class="card-desc">
+        最高画质母带（CRF 15 + 暗部丝绒抗色带编码），上传到 X 主推文或保存在 iPhone 相册珍藏时细节最极致。
+      </p>
+      <button
+        class="btn-primary"
+        type="button"
+        data-share-video="./royal-music-box-master-1080p60.mp4"
+        data-filename="圣咏玫瑰八音盒_1080P60帧原画母带.mp4"
+      >
+        <span>📲 一键存入 iPhone 相册（存储视频）</span>
+      </button>
+      <div class="sub-actions">
+        <span class="sub-hint">弹出系统菜单后点<strong>「存储视频」</strong>即入相册</span>
+        <a class="direct-link" href="./royal-music-box-master-1080p60.mp4" download="圣咏玫瑰八音盒_1080P60帧原画母带.mp4">📥 存到“文件”</a>
+      </div>
+    </section>
+
+    <!-- 版本 2：微信与聊天软件直发轻量超清版 -->
+    <section class="card">
+      <div class="card-head">
+        <div class="card-title">💬 微信 / 聊天软件秒发专享 · 超清版</div>
+        <span class="card-pill">16.5 MB · 低于25M阈值</span>
+      </div>
+      <p class="card-desc">
+        控制在微信 25MB 视频直发门槛以内，同样保持 1080×1920 满帧 60FPS 与 48kHz 立体声琴音，发微信好友秒传不糊。
+      </p>
+      <button
+        class="btn-primary"
+        type="button"
+        data-share-video="./royal-music-box-wechat-hd.mp4"
+        data-filename="圣咏玫瑰八音盒_微信超清60帧.mp4"
+      >
+        <span>📲 存入 iPhone 相册 / 直接转发微信</span>
+      </button>
+      <div class="sub-actions">
+        <span class="sub-hint">也可在弹出菜单直接点<strong>「微信」</strong>发给好友</span>
+        <a class="direct-link" href="./royal-music-box-wechat-hd.mp4" download="圣咏玫瑰八音盒_微信超清60帧.mp4">📥 存到“文件”</a>
+      </div>
+    </section>
+
+    <!-- 版本 3：离线单文件礼盒 & 线上试玩链接 -->
+    <section class="card">
+      <div class="card-head">
+        <div class="card-title">🎁 离线单文件数字礼盒 &amp; 试玩链接</div>
+        <span class="card-pill">540 KB · 零网络可玩</span>
+      </div>
+      <p class="card-desc">
+        可将整只八音盒打包成单个 <code>.html</code> 礼盒文件通过微信或 AirDrop 送给好友，对方断网也能打开赏玩；或直接复制线上试玩网址：
+      </p>
+      <button class="btn-secondary" id="giftHtmlBtn" type="button">
+        🎁 一键转发离线礼盒文件（圣咏玫瑰皇家八音盒.html）
+      </button>
+      <div class="copy-box">
+        <span class="copy-url" id="playUrlText">https://redbookmomo-netizen.github.io/music-box/</span>
+        <button class="copy-btn" id="copyUrlBtn" type="button">复制链接</button>
+      </div>
+    </section>
+  </main>
+
+  <div class="toast" id="toast">已复制到剪贴板</div>
+
+  <script>
+    (() => {
+      'use strict';
+
+      const toastEl = document.getElementById('toast');
+      let toastTimer = 0;
+      function showToast(msg) {
+        toastEl.textContent = msg;
+        toastEl.classList.add('show');
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => toastEl.classList.remove('show'), 2600);
+      }
+
+      // 缓存已拉取到内存的 File 对象，确保 iOS Safari 二次轻触 0ms 瞬时拉起系统分享菜单（存储视频 -> 相册）
+      const readyFiles = new Map();
+      const loadingMap = new Map();
+
+      async function fetchWithProgress(url, filename, mimeType, onProgress) {
+        const res = await fetch(url);
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        const total = Number(res.headers.get('content-length')) || 0;
+        if (!res.body || !total) {
+          const blob = await res.blob();
+          onProgress(100);
+          return new File([blob], filename, { type: mimeType });
+        }
+        const reader = res.body.getReader();
+        const chunks = [];
+        let loaded = 0;
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) break;
+          chunks.push(value);
+          loaded += value.byteLength;
+          onProgress(Math.min(99, Math.round((loaded / total) * 100)));
+        }
+        onProgress(100);
+        const blob = new Blob(chunks, { type: mimeType });
+        return new File([blob], filename, { type: mimeType });
+      }
+
+      document.querySelectorAll('[data-share-video]').forEach(btn => {
+        const url = btn.dataset.shareVideo;
+        const filename = btn.dataset.filename;
+        const labelSpan = btn.querySelector('span');
+        const origText = labelSpan.textContent;
+
+        btn.addEventListener('click', async () => {
+          // 若已在内存中准备完毕，0ms 同步拉起 iOS 系统菜单（点「存储视频」直接存入相册）
+          if (readyFiles.has(url)) {
+            const file = readyFiles.get(url);
+            if (navigator.canShare && navigator.canShare({ files: [file] })) {
+              try {
+                await navigator.share({
+                  files: [file],
+                  title: filename
+                });
+                showToast('✨ 在菜单中点「存储视频」即可存入相册');
+                return;
+              } catch (err) {
+                if (err && err.name === 'AbortError') return;
+              }
+            }
+            // 桌面浏览器回退为直接下载
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(file);
+            a.download = filename;
+            a.click();
+            return;
+          }
+
+          if (loadingMap.get(url)) return;
+          loadingMap.set(url, true);
+          const t0 = performance.now();
+
+          try {
+            labelSpan.textContent = '⏳ 正在拉取超清视频 0%...';
+            const file = await fetchWithProgress(url, filename, 'video/mp4', pct => {
+              labelSpan.textContent = `⏳ 正在拉取超清视频 ${pct}%...`;
+            });
+            readyFiles.set(url, file);
+            loadingMap.set(url, false);
+
+            // 若网速极快（用户手势激活尚未过期），尝试直接一步弹出 iOS 菜单
+            if (navigator.canShare && navigator.canShare({ files: [file] }) && (performance.now() - t0) < 1500) {
+              try {
+                labelSpan.textContent = origText;
+                await navigator.share({ files: [file], title: filename });
+                return;
+              } catch (err) {
+                if (err && err.name === 'AbortError') return;
+              }
+            }
+
+            // 若拉取耗时超过 iOS 单次手势窗口，切换为金色脉冲就绪态，再点一下立即弹出「存储视频」！
+            if (navigator.canShare && navigator.canShare({ files: [file] })) {
+              btn.classList.add('ready-pulse');
+              labelSpan.textContent = '✨ 已就绪！再点一下弹出「存储视频」存进相册';
+              showToast('视频拉取完成，再轻触一次按钮即可存入相册！');
+            } else {
+              // 不支持文件级 Web Share 的桌面浏览器自动触发下载
+              labelSpan.textContent = '✅ 已开始下载';
+              const a = document.createElement('a');
+              a.href = URL.createObjectURL(file);
+              a.download = filename;
+              a.click();
+              setTimeout(() => { labelSpan.textContent = origText; }, 2500);
+            }
+          } catch (e) {
+            loadingMap.set(url, false);
+            labelSpan.textContent = origText;
+            window.location.href = url;
+          }
+        });
+      });
+
+      // 离线单文件 .html 数字礼盒一键分享 / 下载
+      const giftBtn = document.getElementById('giftHtmlBtn');
+      let cachedHtmlFile = null;
+      giftBtn.addEventListener('click', async () => {
+        try {
+          if (!cachedHtmlFile) {
+            const res = await fetch('../index.html');
+            const blob = await res.blob();
+            cachedHtmlFile = new File([blob], '圣咏玫瑰皇家八音盒.html', { type: 'text/html' });
+          }
+          if (navigator.canShare && navigator.canShare({ files: [cachedHtmlFile] })) {
+            await navigator.share({
+              files: [cachedHtmlFile],
+              title: '圣咏玫瑰皇家八音盒'
+            });
+            return;
+          }
+          const a = document.createElement('a');
+          a.href = URL.createObjectURL(cachedHtmlFile);
+          a.download = '圣咏玫瑰皇家八音盒.html';
+          a.click();
+          showToast('已开始下载 圣咏玫瑰皇家八音盒.html');
+        } catch (err) {
+          if (err && err.name === 'AbortError') return;
+          showToast('请长按或使用浏览器菜单保存页面');
+        }
+      });
+
+      // 一键复制主站体验链接
+      document.getElementById('copyUrlBtn').addEventListener('click', async () => {
+        const url = 'https://redbookmomo-netizen.github.io/music-box/';
+        try {
+          await navigator.clipboard.writeText(url);
+          showToast('✨ 已复制八音盒体验链接！');
+        } catch (_) {
+          const inp = document.createElement('input');
+          inp.value = url;
+          document.body.appendChild(inp);
+          inp.select();
+          document.execCommand('copy');
+          inp.remove();
+          showToast('✨ 已复制八音盒体验链接！');
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
